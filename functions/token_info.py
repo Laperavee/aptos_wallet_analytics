@@ -35,7 +35,23 @@ def get_token_price(address):
             for pair in data['pairs']:
                 if pair['baseToken']['address'] == address or pair['quoteToken']['address'] == address:
                     price = pair['priceUsd']
-                    return price
+                    return float(price)
+
+    except requests.exceptions.RequestException as e:
+        return f"Erreur lors de la récupération du prix : {e}"
+
+def get_aptos_price():
+    address = "0x1::aptos_coin::AptosCoin"
+    url = f"https://api.dexscreener.com/latest/dex/tokens/{address}"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        if 'pairs' in data:
+            for pair in data['pairs']:
+                if pair['baseToken']['address'] == address or pair['quoteToken']['address'] == address:
+                    price = pair['priceUsd']
+                    return float(price)
 
     except requests.exceptions.RequestException as e:
         return f"Erreur lors de la récupération du prix : {e}"
