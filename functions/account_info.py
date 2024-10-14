@@ -3,7 +3,6 @@ from aptoswallet.comon.res import *
 
 def get_transactions(address):
     url = URL + f'accounts/{address}/transactions'
-    print(url)
     transactions = request(url)
     swap_events = []
     for transaction in transactions:

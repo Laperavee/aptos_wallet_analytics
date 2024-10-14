@@ -10,7 +10,6 @@ def token_info_search(address):
             decimals = data.get('decimals')
             return decimals
 
-
 def get_remaining_tokens(token_address, address):
     url = URL + f"/accounts/{address}/resource/0x1::coin::CoinStore<{token_address}>"
     response = request(url)
@@ -42,6 +41,7 @@ def get_token_price(address):
 
 def get_token_info(token_address,address):
     url = f"https://api.dexscreener.com/latest/dex/tokens/{token_address}"
+    print(url)
     try:
         response = requests.get(url)
         response.raise_for_status()
