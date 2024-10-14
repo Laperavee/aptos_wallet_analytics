@@ -40,6 +40,17 @@ def get_token_price(address):
     except requests.exceptions.RequestException as e:
         return f"Erreur lors de la récupération du prix : {e}"
 
+def get_token_info(token_address,address):
+    url = f"https://api.dexscreener.com/latest/dex/tokens/{token_address}"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        url = data["pairs"][0]["url"]
+        url += "?maker="+address
+        return url
+    except requests.exceptions.RequestException as e:
+        return f"Erreur lors de la récupération du prix : {e}"
 def get_aptos_price():
     address = "0x1::aptos_coin::AptosCoin"
     url = f"https://api.dexscreener.com/latest/dex/tokens/{address}"

@@ -91,6 +91,7 @@ def calculate_pnl(positions):
             pnl[token]["remaining"] = round(remaining_usd,0)
             pnl[token]["percentage"] = round((((out_usd + remaining_usd) - in_usd) / in_usd) * 100, 2)
             pnl[token]["dollars"] = dollars
+            pnl[token]["address"] = data["address"]
         else:
             continue
         if pnl[token]["percentage"] > 0:

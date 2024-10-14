@@ -23,7 +23,6 @@ async def scan(ctx, address: str):
     embed = discord.Embed(title="📊 PnL", color=discord.Color.green())
 
     for token, data in pnl.items():
-        print(data)
         if token in ["winrate", "total_pnl"]:
             continue
         if data['dollars'] >= 0:
@@ -39,10 +38,12 @@ async def scan(ctx, address: str):
         else:
             percentage_text = f"{abs(data['percentage'])}"
             colored_percentage = f"```diff\n- {percentage_text} %```"
-
+        url = get_token_info(data["address"],address)
+        dexscreener_emoji = '<:dexscreener:1295025396152274956>'
         embed.add_field(
-            name=f"📈 **{token}** ",
-            value=(f"💰 **Remaining : {data['remaining']} $**\n"
+            name=f"📈 **{token}**",
+            value=(f"[{dexscreener_emoji} chart]({url})\n"
+                    f"💰 **Remaining : {data['remaining']} $**\n"
                    f"{colored_percentage}"
                    f"{colored_pnl}\n"),
             inline=False
@@ -76,5 +77,5 @@ async def positions(ctx, address: str):
         embed.add_field(name=f"📈 Token : {token}", value=f"💰 Unrealized : **{data['remaining']} $**", inline=False)
     await ctx.reply(embed=embed)
 
-token = "YOUR_API_TOKEN"
+token = "MTI5NDgxMjE4MDA5Njc0OTY4MQ.GfMZ39.T4WCZ0lQVz5raIZCsu25suwWt5XVjtAq0Zsdt8"
 bot.run(token)
