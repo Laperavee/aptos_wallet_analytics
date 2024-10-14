@@ -77,5 +77,5 @@ async def positions(ctx, address: str):
         embed.add_field(name=f"📈 Token : {token}", value=f"💰 Unrealized : **{data['remaining']} $**", inline=False)
     await ctx.reply(embed=embed)
 
-token = "MTI5NDgxMjE4MDA5Njc0OTY4MQ.GfMZ39.T4WCZ0lQVz5raIZCsu25suwWt5XVjtAq0Zsdt8"
+token = "YOUR_API_TOKEN"
 bot.run(token)
